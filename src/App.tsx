@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import styled, { ThemeContext } from 'styled-components';
+import {themes_provider} from "./themes/themes"
+import {top} from "./components/top"
+
+// Define GitHub repos structure
+interface repo{
+  name: string;
+  url: string;
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MainContainer>
+        
+      </MainContainer>
+    </>
   );
 }
 
+const MainContainer = styled.main`
+background-color: #f0f0f0;
+padding: 20px;
+`
 export default App;
