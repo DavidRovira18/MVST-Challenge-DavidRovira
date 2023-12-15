@@ -1,9 +1,7 @@
 import React from 'react'
 
-const start = () => {
+export const Start = () => {
   return (
     <div>start</div>
   )
 }
-
-export default start

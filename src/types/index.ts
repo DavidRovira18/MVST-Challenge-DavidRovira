@@ -1,6 +1,6 @@
 export interface UserProps{ // User properties when getting user (src: https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28)
-    nick: string; 
-    id: string;
+    nick: string;
+    name: string;
     avatar: string;
     url: string;
     followers: string;
@@ -8,8 +8,6 @@ export interface UserProps{ // User properties when getting user (src: https://d
     repos: string;
     email: string;
     bio: string;
-    created_at: string;
-    update_at: string;
 }
 
 export interface TopProps{

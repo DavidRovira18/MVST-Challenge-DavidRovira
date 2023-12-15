@@ -23,6 +23,20 @@ export const Top = ({setUser}: TopProps) => {
     
     //Get user from response
     console.log(user_data);
+
+    const user: UserProps = { //Store user properties
+      nick: user_data.login,
+      name: user_data.name,
+      avatar: user_data.avatar_url,
+      url: user_data.html_url,
+      followers: user_data.followers,
+      following: user_data.following,
+      repos: user_data.repos_url,
+      email: user_data.email,
+      bio: user_data.bio
+    }
+
+    setUser(user);
   }
 
   function handleInput(){ //Request to the GitHub API
