@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState, useRef, HtmlHTMLAttributes } from "react"
 import styled from "styled-components"
-import { UserProps, TopProps } from "../types"
+import { UserProps, TopProps, UserRepoProps} from "../types"
 
 export const Top = ({setUser}: TopProps) => {
   
   const [empty, setEmpty] = useState<boolean>(false);
   const [userNotFound, setUserNotFound] = useState<boolean>(false);
+  const [userRepos, setUserRepos] = useState([]);
   const userReference = useRef<HTMLInputElement>(null);
-  const [input] = useState("");
+  const [input] = useState("octocat");
 
   async function fetchUserAPI(username: string){ //Fetch User data from Github API
     const response = await fetch(`https://api.github.com/users/${username}`);
@@ -16,6 +17,7 @@ export const Top = ({setUser}: TopProps) => {
     if (response.status != 200){ //status 200 response OK!
       setUserNotFound(true);
       setUser(null);
+      setUserRepos([]);
       return;
     }
 
@@ -31,12 +33,30 @@ export const Top = ({setUser}: TopProps) => {
       url: user_data.html_url,
       followers: user_data.followers,
       following: user_data.following,
-      repos: user_data.repos_url,
+      repos_url: user_data.repos_url,
+      num_repos: user_data.public_repos,
+      repos: [],
       email: user_data.email,
       bio: user_data.bio
     }
 
+
+    const repos_response = await fetch(user_data.repos_url);
+    const repos_data = await repos_response.json();
+
+    const userRepos: UserRepoProps[] = repos_data.map((repo: any) => ({
+      name: repo.name,
+      description: repo.description,
+      forks: repo.forks,
+      language: repo.language,
+      license: repo.license?.name,
+      html_url: repo.html_url,
+    }));
+    
+    user.repos = userRepos;
     setUser(user);
+
+    console.log(user);
   }
 
   function handleInput(){ //Request to the GitHub API
@@ -51,6 +71,10 @@ export const Top = ({setUser}: TopProps) => {
     fetchUserAPI(userReference.current.value);
   }
 
+  useEffect(() => {
+    fetchUserAPI(input)
+  }, [input]);
+
   return (
     <HeaderContainer>
       <HeaderArea>
@@ -64,6 +88,7 @@ export const Top = ({setUser}: TopProps) => {
       <SearchAreaContainer>
         <SearchForm onSubmit = {e=>{e.preventDefault(); handleInput();}}>
           <SearchArea placeholder="Enter GitHub Username" ref={userReference} name="username" type="text"></SearchArea>
+          {userNotFound && <NotFound>User not found :(</NotFound>}
           <button type="submit">Search!</button>
         </SearchForm>
       </SearchAreaContainer>
@@ -95,15 +120,14 @@ const SearchAreaContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-`
+  margin-top: 20px; /* Añadido para ajustar el espacio superior */
+`;
 
 const SearchForm = styled.form`
   display: flex;
   align-items: center;
-`;
-
-const SearchArea = styled.input`
-  width: 20vw;
+  justify-content: space-evenly;
+  min-width: 20vw;
   padding: 10px;
   background-color: #404040;
   border: none;
@@ -112,7 +136,36 @@ const SearchArea = styled.input`
   outline: none;
   transition: background-color 0.3s;
 
-  &:focus{
+  &:focus {
     background-color: #505050;
   }
-` 
+
+  button {
+    background-color: #30406a;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color ease-in .5s;
+
+    &:hover {
+      background-color: #3498db;
+    }
+  }
+`;
+
+const SearchArea = styled.input`
+  width: 15vw;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  outline: none;
+`;
+
+const NotFound = styled.small`
+  font-family: 'Rethink Sans', sans-serif;
+  font-weight: bold;
+  color: red;
+  margin-right: 2.4rem;
+`;

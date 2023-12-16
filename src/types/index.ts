@@ -5,9 +5,12 @@ export interface UserProps{ // User properties when getting user (src: https://d
     url: string;
     followers: string;
     following: string;
-    repos: string;
+    repos_url: string;
+    num_repos: string;
+    repos: UserRepoProps[];
     email: string;
     bio: string;
+
 }
 
 export interface TopProps{
@@ -17,3 +20,13 @@ export interface TopProps{
 export interface UserData{  //Get user data properties
     user: UserProps;
 }
+
+export interface UserRepoProps{
+    name: string;
+    description: string;
+    forks: string;
+    language: string;
+    license: string;
+    html_url: string;
+}
+

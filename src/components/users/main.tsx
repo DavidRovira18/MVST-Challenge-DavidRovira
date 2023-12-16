@@ -1,30 +1,38 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Top } from '../top'
-import {Start} from './start'
+import {Stats} from './Stats'
 import { TopUser } from './top_user'
 import { UserData } from '../../types'
+import { Repos } from './repos'
 
 export const Main = ({user}: UserData) => {
   return (
     <MainUserContainer>
+      <SideArea>
         <TopUser username={user.nick} name={user.name} avatar={user.avatar} bio={user.bio} url={user.url}></TopUser>
+        <Stats repos={user.num_repos} followers={user.followers} following={user.following}></Stats>
+      </SideArea> 
+      <ReposArea>
+        <Repos repos={user.repos}></Repos>
+      </ReposArea>
     </MainUserContainer>
   )
 }
 
 const MainUserContainer = styled.section`
   width: 60%;
-  background: rgba(255, 255, 255, .3);
+  max-height: 30vh;
+  background: rgba(48, 64, 106, 0.4);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
-  border: 1.5px solid rgba(209, 213, 219, 0.3);
+  border: 1.5px solid rgba(44, 62, 102, 0.3);
   border-radius: 1.5rem;
   margin-top: 1.6rem;
   max-width: 73.3rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
+  flex-direction: column;
 
   @media (min-width: 768px) {
     padding: 5.2rem 4.8rem;
@@ -52,3 +60,12 @@ const UserLogo = styled.img`
     display: block;
   }
 `
+
+const SideArea = styled.div`
+  width: 100%;
+`;
+
+const ReposArea = styled.div`
+  width: 100%;
+  overflow-y: scroll;
+`;

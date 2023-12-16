@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import './App.css';
-import styled, { ThemeContext } from 'styled-components';
-//import {themes_provider} from "./themes/themes"
+import styled from 'styled-components';
 import {Top} from "./components/top" 
 import { UserProps } from './types';
 import { Main } from './components/users/main';
@@ -20,18 +19,16 @@ function App() {
   }
 
   return (
-    <>
-      <MainContainer>
-        <Top setUser={setUserData} />
-        {user && <Main user={user}/>}
-      </MainContainer>
-    </>
+    <MainContainer>
+      <Top setUser={setUserData}/>
+      {user && <Main user={user}/>}
+    </MainContainer>
   );
 }
 
+
 const MainContainer = styled.main`
   background-color: #191919;
-  padding: 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
