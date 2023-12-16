@@ -6,15 +6,23 @@ export function Repos({ repos }: { repos: UserRepoProps[] }) {
     <ReposContainer>
         {repos.map((repo) => (
         <RepoItem key={repo.name}>
-            <h3><a href={repo.html_url}>{repo.name}</a></h3>
-            <small>Description</small>
-            <strong>{repo.description}</strong>
-            <small>Forks</small>
-            <strong>{repo.forks}</strong>    
-            {repo.language && <small>Language</small> && <strong>{repo.language}</strong>}
-            <small>License</small>
-            {repo.license && <strong>{repo.license}</strong> || <strong>None</strong>}
-            
+            <a href={repo.html_url}><h3>{repo.name}</h3></a>
+            <RepoProp>
+              <strong>Description</strong>
+              {repo.description && <small>{repo.description}</small> || <small>-</small>}
+            </RepoProp>
+            <RepoProp>
+              <strong>Forks</strong>
+              <small>{repo.forks}</small>    
+            </RepoProp>
+            <RepoProp>
+              <strong>Language</strong>
+              {repo.language && <small>{repo.language}</small> || <small>-</small>}
+            </RepoProp>
+            <RepoProp>
+              <strong>License</strong>
+              {repo.license && <small>{repo.license}</small> || <small>-</small>}
+            </RepoProp>           
         </RepoItem>
       ))}
     </ReposContainer>
@@ -34,5 +42,24 @@ const ReposContainer = styled.div`
 `
 
 const RepoItem = styled.div`
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items:center;
+  border-radius: 1rem;
+  width: 100%;
+  background-color: cadetblue;
 
+  a{  //not working CHECK :()
+    &:focus{
+      color: #0366d6;
+    }
+  }
+`
+
+const RepoProp = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `

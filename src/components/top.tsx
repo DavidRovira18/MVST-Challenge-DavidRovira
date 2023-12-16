@@ -100,13 +100,16 @@ export const Top = ({setUser}: TopProps) => {
 
 const HeaderContainer = styled.header`
   width: 100%;
+  max-height: 20vh;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `
 
 const HeaderArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10%;
+  padding: 1% 3% 0% 3%;
 `
 
 const HeaderTitle = styled.h1`
@@ -120,8 +123,7 @@ const SearchAreaContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 20px; /* Añadido para ajustar el espacio superior */
-`;
+`
 
 const SearchForm = styled.form`
   display: flex;

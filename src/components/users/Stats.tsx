@@ -33,6 +33,7 @@ const StatsContainer = styled.div`
   background-color: white;
   padding: 1.6rem 3rem;
   gap: 20px;
+  max-height: 5vh;
 `
 
 const StatsList = styled.li`

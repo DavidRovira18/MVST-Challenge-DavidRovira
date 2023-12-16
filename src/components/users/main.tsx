@@ -20,27 +20,18 @@ export const Main = ({user}: UserData) => {
 }
 
 const MainUserContainer = styled.section`
-  width: 60%;
-  max-height: 30vh;
+  min-width: 80vw;
+  max-height: 70vh;
   background: rgba(48, 64, 106, 0.4);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   border: 1.5px solid rgba(44, 62, 102, 0.3);
   border-radius: 1.5rem;
   margin-top: 1.6rem;
-  max-width: 73.3rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-
-  @media (min-width: 768px) {
-    padding: 5.2rem 4.8rem;
-  }
-
-  @media (min-width: 900px) {
-    padding: 4.8rem;
-  }
 
   a {
     all: unset;
@@ -62,7 +53,9 @@ const UserLogo = styled.img`
 `
 
 const SideArea = styled.div`
-  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 const ReposArea = styled.div`
