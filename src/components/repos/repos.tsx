@@ -7,7 +7,7 @@ export function Repos({ repos }: { repos: UserRepoProps[] }) {
   const [filterLanguage, setFilterLanguage] = useState("");
   const [userLanguages, setUserLanguages] = useState<string[]>([]);
 
-  useEffect(() => {
+  useEffect(() => { //To show only languages the user have in its repositories
     const languagesSet = new Set<string>();
     repos.forEach((repo) => {
       if (repo.language) {
@@ -17,7 +17,7 @@ export function Repos({ repos }: { repos: UserRepoProps[] }) {
     setUserLanguages(Array.from(languagesSet));
   }, [repos]);
 
-  const filteredRepos = repos.filter((repo) =>
+  const filteredRepos = repos.filter((repo) => //Create the list of filtered repos 
     repo.name.toLowerCase().includes(filterName.toLowerCase()) &&
     (filterLanguage === "" || repo.language === filterLanguage)
   )
@@ -50,7 +50,7 @@ export function Repos({ repos }: { repos: UserRepoProps[] }) {
               <a href={repo.html_url}><h3>{repo.name}</h3></a>
               <RepoProp>
                 <strong>Description</strong>
-                {repo.description && <small>{repo.description}</small> || <small>-</small>}
+                {repo.description && <small>{repo.description}</small> || <small>-</small>} 
               </RepoProp>
               <RepoProp>
                 <strong>Forks</strong>

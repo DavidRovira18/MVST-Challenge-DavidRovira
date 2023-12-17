@@ -56,13 +56,12 @@ const SideArea = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
 `;
 
 const ReposArea = styled.div`
   width: 100%;
   overflow-y: scroll;
-`;
-
-const ReposFilter = styled.div`
-  width: 100%;
 `;
