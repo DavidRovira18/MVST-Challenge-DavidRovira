@@ -3,7 +3,7 @@ import { Top } from '../top'
 import {Stats} from './Stats'
 import { TopUser } from './top_user'
 import { UserData } from '../../types'
-import { Repos } from './repos'
+import { Repos } from '../repos/repos'
 
 export const Main = ({user}: UserData) => {
   return (
@@ -61,4 +61,8 @@ const SideArea = styled.div`
 const ReposArea = styled.div`
   width: 100%;
   overflow-y: scroll;
+`;
+
+const ReposFilter = styled.div`
+  width: 100%;
 `;
